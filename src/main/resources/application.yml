@@ -1,0 +1,16 @@
+spring:
+  profiles:
+      active: prod
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/dbgirl?useSSL=false
+    username: root
+    password: 123
+  jpa:
+      show-sql: true
+      hibernate:
+        ddl-auto: update
+girl:
+  cupSize: B
+  age: 18
+  name: Lucy
