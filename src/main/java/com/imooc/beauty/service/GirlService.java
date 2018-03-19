@@ -2,6 +2,8 @@ package com.imooc.beauty.service;
 
 import com.imooc.beauty.controller.vo.GirlVO;
 import com.imooc.beauty.domain.Girl;
+import com.imooc.beauty.enums.ResultEnum;
+import com.imooc.beauty.exception.GirlException;
 import com.imooc.beauty.repository.GirlRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,18 @@ public class GirlService {
         Girl one = repository.getOne(id);
         GirlVO girlVO = new GirlVO();
 
+        BeanUtils.copyProperties(one, girlVO);
+        return girlVO;
+    }
+
+    public GirlVO getAge(Integer id) {
+        Girl one = repository.getOne(id);
+        if (one.getAge() < 10) {
+            throw new GirlException(ResultEnum.PRIMARY_SCHOOL);
+        } else if (one.getAge() < 16) {
+            throw new GirlException(ResultEnum.MIDDLE_SCHOOL);
+        }
+        GirlVO girlVO = new GirlVO();
         BeanUtils.copyProperties(one, girlVO);
         return girlVO;
     }
